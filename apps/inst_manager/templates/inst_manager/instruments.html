@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Instruments | TechSO Webtools{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Lista strumenti</h2>
+    {% if instruments %}
+    <table>
+        <thead>
+            <tr>
+                <th>Tag</th>
+                <th>Descrizione</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for instrument in instruments %}
+            <tr>
+                <td>{{ instrument.tag }}</td>
+                <td>{{ instrument.description or '-' }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="muted">Nessuno strumento registrato.</p>
+    {% endif %}
+</div>
+{% endblock %}

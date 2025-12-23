@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Home | TechSO Webtools{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Benvenuto nel portale TechSO Webtools</h2>
+    <p class="muted">Seleziona uno strumento dal menu o esplora la lista completa dei tool disponibili.</p>
+</div>
+{% for tool in tools %}
+<div class="card">
+    <span class="badge">{{ tool.status }}</span>
+    <h3>{{ tool.name }}</h3>
+    <p class="muted">{{ tool.description }}</p>
+</div>
+{% endfor %}
+{% endblock %}
