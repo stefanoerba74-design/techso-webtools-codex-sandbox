@@ -1,0 +1,84 @@
+commit 646e3a77eebc7237f25828b76315b27746cf8965 (HEAD -> work)
+Author: Codex <codex@openai.com>
+Date:   Tue Dec 23 16:06:03 2025 +0000
+
+    Add Flask project structure
+
+diff --git a/app.py b/app.py
+new file mode 100644
+index 0000000..31f88aa
+--- /dev/null
++++ b/app.py
+@@ -0,0 +1,20 @@
++from flask import Flask
++
++from config import Config
++from extensions import init_extensions
++
++
++def create_app() -> Flask:
++    app = Flask(__name__)
++    app.config.from_object(Config)
++    init_extensions(app)
++
++    @app.get("/")
++    def index() -> str:
++        return "OK"
++
++    return app
++
++
++if __name__ == "__main__":
++    create_app().run()
+diff --git a/apps/__init__.py b/apps/__init__.py
+new file mode 100644
+index 0000000..caa267e
+--- /dev/null
++++ b/apps/__init__.py
+@@ -0,0 +1 @@
++"""Application blueprints live in this package."""
+diff --git a/config.py b/config.py
+new file mode 100644
+index 0000000..3daac67
+--- /dev/null
++++ b/config.py
+@@ -0,0 +1,2 @@
++class Config:
++    SECRET_KEY = "change-me"
+diff --git a/extensions.py b/extensions.py
+new file mode 100644
+index 0000000..8e6e08a
+--- /dev/null
++++ b/extensions.py
+@@ -0,0 +1,8 @@
++from flask import Flask
++
++
++def init_extensions(app: Flask) -> None:
++    """Initialize Flask extensions.
++
++    Add extension setup calls here.
++    """
+diff --git a/templates/base.html b/templates/base.html
+new file mode 100644
+index 0000000..52a48a0
+--- /dev/null
++++ b/templates/base.html
+@@ -0,0 +1,10 @@
++<!doctype html>
++<html lang="en">
++  <head>
++    <meta charset="utf-8">
++    <title>Flask App</title>
++  </head>
++  <body>
++    <h1>Flask App</h1>
++  </body>
++</html>
+diff --git a/tools/__init__.py b/tools/__init__.py
+new file mode 100644
+index 0000000..ae45d37
+--- /dev/null
++++ b/tools/__init__.py
+@@ -0,0 +1 @@
++"""Utility helpers for the project."""
